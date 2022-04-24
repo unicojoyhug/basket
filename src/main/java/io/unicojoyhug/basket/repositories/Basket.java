@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "baskets")
-public class BasketEntity {
+public class Basket {
     @Id
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @GeneratedValue(generator = "UUID")
@@ -23,14 +23,14 @@ public class BasketEntity {
     @Column(name = "created")
     private Instant created;
 
-    public BasketEntity(){}
+    public Basket(){}
 
-    public BasketEntity( UUID id, UUID customerId) {
+    public Basket(UUID id, UUID customerId) {
         this.id = id;
         this.customerId = customerId;
     }
 
-    public BasketEntity( UUID id, UUID customerId, Instant created) {
+    public Basket(UUID id, UUID customerId, Instant created) {
         this.id = id;
         this.customerId = customerId;
         this.created = created;
@@ -67,7 +67,7 @@ public class BasketEntity {
         return id;
     }
 
-    public BasketEntity setId(UUID id) {
+    public Basket setId(UUID id) {
         this.id = id;
         return this;
     }

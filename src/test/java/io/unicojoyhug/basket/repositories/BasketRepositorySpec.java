@@ -15,9 +15,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace=AutoConfigureTestDatabase.Replace.NONE)
-public class BasketEntityRepositorySpec {
+public class BasketRepositorySpec {
     @Autowired
-    BasketEntityRepository basketEntityRepository;
+    BasketRepository basketRepository;
 
     @Test
     public void getBasket_returnsBasket(){
@@ -25,10 +25,10 @@ public class BasketEntityRepositorySpec {
         UUID basketId = UUID.randomUUID();
         Instant created = Instant.now();
 
-        BasketEntity basket = new BasketEntity(basketId, customerId, created);
-        basketEntityRepository.saveAndFlush(basket);
+        Basket basket = new Basket(basketId, customerId, created);
+        basketRepository.saveAndFlush(basket);
 
-        BasketEntity createdBasket = basketEntityRepository.getById(basket.getId());
+        Basket createdBasket = basketRepository.getById(basket.getId());
 
         assertThat(createdBasket.getCreated()).isEqualTo(created);
     }
