@@ -6,5 +6,5 @@ services:
       - 5432:5432
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: ${BASKET_DB_PASSWORD}
+      POSTGRES_PASSWORD: 123
       POSTGRES_DB: basket_db
