@@ -1,0 +1,10 @@
+version: "3"
+services:
+  db:
+    image: postgres:11-alpine
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${BASKET_DB_PASSWORD}
+      POSTGRES_DB: basket_db
