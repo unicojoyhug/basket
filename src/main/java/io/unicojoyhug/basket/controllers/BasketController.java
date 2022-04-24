@@ -1,5 +1,6 @@
 package io.unicojoyhug.basket.controllers;
 
+import io.unicojoyhug.basket.controllers.models.BasketDeleteRequest;
 import io.unicojoyhug.basket.controllers.models.BasketRequest;
 import io.unicojoyhug.basket.controllers.models.BasketUpdateRequest;
 import io.unicojoyhug.basket.errors.NegativeQuantityException;
@@ -27,5 +28,10 @@ public class BasketController {
     public CustomerBasket getOrCreateCustomerBasket(@RequestBody BasketUpdateRequest request){
         if(request.getQuantity()<0) throw new NegativeQuantityException("Quantity cannot be negative.");
         return basketService.updateBasket(request.getBasketId(),request.getCustomerId(), request.getProductNumber(), request.getQuantity());
+    }
+
+    @DeleteMapping(path = "/delete")
+    public void deleteBasket(@RequestBody BasketDeleteRequest request){
+        basketService.deleteBasket(request.getBasketId(), request.getCustomerId());
     }
 }

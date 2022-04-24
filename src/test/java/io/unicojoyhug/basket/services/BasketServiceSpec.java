@@ -131,5 +131,20 @@ public class BasketServiceSpec {
         itemResult.forEach(i -> assertThat(i.getQuantity()).isEqualTo((5)));
     }
 
+    @Test
+    public void deleteBasket() {
+        Basket basket = new Basket(basketId, customerId);
+        Instant now = Instant.now();
+        int productNumber = 123;
+        BasketItems basketItems1 = new BasketItems(itemId, productNumber, 1, now, now, basketId);
+        BasketItems basketItems1Updated = new BasketItems(itemId, productNumber, 5, now, now, basketId);
 
+        List<BasketItems> items = List.of(basketItems1);
+
+        when(basketItemsRepository.findAllByBasketId(basketId)).thenReturn(List.of(basketItems1Updated));
+
+        BasketItem item = new BasketItem(itemId, productNumber, 3, 100, now);
+
+        basketService.deleteBasket(basketId, customerId);
+    }
 }

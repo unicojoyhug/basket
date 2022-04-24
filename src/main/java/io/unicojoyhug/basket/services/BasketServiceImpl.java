@@ -75,9 +75,10 @@ public class BasketServiceImpl implements BasketService {
 
     @Override
     public void deleteBasket(UUID basketId, UUID customerId) {
-
+        List<BasketItems> itemsToDelete = basketItemsRepository.findAllByBasketId(basketId);
+        itemsToDelete.parallelStream().forEach(item -> basketItemsRepository.deleteById(item.getId()));
+        basketRepository.deleteById(basketId);
     }
-
 
     private Instant getLastModified(Instant basketCreated, List<BasketItem> items){
         return  items.stream().map(BasketItem::getModified).max(Instant::compareTo).orElseGet(() -> basketCreated);
