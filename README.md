@@ -9,5 +9,9 @@
     - List basket
     - Change quantity
 - DB
-  - Baskets
-    - id, customerId, created timestamp
+  - Basket
+    - id(UUID), customerId(UUID), created
+  - BasketItems
+    - id(UUID), basketId(UUID - fk), created, modified, productNumber, quantity
+  - ApiKey
+    - id, key
