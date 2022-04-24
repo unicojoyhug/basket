@@ -8,7 +8,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.Instant;
-import java.util.Optional;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -16,31 +15,28 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace=AutoConfigureTestDatabase.Replace.NONE)
-public class BasketRepositorySpec {
+public class BasketItemsRepositorySpec {
     @Autowired
-    BasketRepository basketRepository;
+    private BasketItemsRepository basketItemsRepository;
+    @Autowired
+    private BasketRepository basketRepository;
+
+    private Instant now = Instant.now();
     private UUID customerId = UUID.randomUUID();
     private UUID basketId = UUID.randomUUID();
-    private Instant created = Instant.now();
+    private UUID itemId = UUID.randomUUID();
 
     @Test
-    public void getBasket_returnsBasket(){
-        Basket basket = new Basket(basketId, customerId, created);
+    public void getById_returnsBasketItem(){
+        Basket basket = new Basket(basketId, customerId, now);
         basketRepository.saveAndFlush(basket);
 
-        Basket createdBasket = basketRepository.getById(basket.getId());
+        int productNumber = 123;
 
-        assertThat(createdBasket.getCreated()).isEqualTo(created);
+        BasketItems basketItems = new BasketItems(itemId, productNumber, 3, now, now, basketId);
+        BasketItems result = basketItemsRepository.saveAndFlush(basketItems);
+
+        assertThat(basketItemsRepository.getById(result.getId()).getBasketId()).isEqualTo(basket.getId());
     }
 
-    @Test
-    public void findByCustomerId_returnsBasket(){
-        Basket basket = new Basket(basketId, customerId, created);
-        basketRepository.save(basket);
-        basketRepository.flush();
-
-        Optional<Basket> createdBasket = basketRepository.findByCustomerId(basket.getCustomerId());
-
-        assertThat(createdBasket.isPresent()).isTrue();
-    }
 }
