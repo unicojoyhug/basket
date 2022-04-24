@@ -8,3 +8,6 @@
     - Remove from the basket
     - List basket
     - Change quantity
+- DB
+  - Baskets
+    - id, customerId, created timestamp
