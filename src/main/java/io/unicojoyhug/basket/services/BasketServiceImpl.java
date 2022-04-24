@@ -1,6 +1,7 @@
 package io.unicojoyhug.basket.services;
 
 import io.unicojoyhug.basket.repositories.Basket;
+import io.unicojoyhug.basket.repositories.BasketItems;
 import io.unicojoyhug.basket.repositories.BasketItemsRepository;
 import io.unicojoyhug.basket.repositories.BasketRepository;
 import io.unicojoyhug.basket.services.models.BasketItem;
@@ -54,7 +55,22 @@ public class BasketServiceImpl implements BasketService {
 
     @Override
     public CustomerBasket updateBasket(UUID basketId, UUID customerId, int productNumber, int quantity) {
-        return null;
+        Optional<BasketItems> item = basketItemsRepository.findByBasketIdAndProductNumber(basketId, productNumber);
+        Instant now = Instant.now();
+        Basket basket = basketRepository.getById(basketId);
+
+        if(quantity == 0){
+            basketItemsRepository.deleteByBasketIdAndProductNumber(basketId, productNumber);
+        }else{
+            item.map(
+                    i ->
+                            basketItemsRepository.save(new BasketItems(i.getId(), i.getProductNumber(), quantity, i.getCreated(), now, basketId))
+            ).orElseGet(() ->basketItemsRepository.save(new BasketItems(UUID.randomUUID(), productNumber, quantity, now, now, basketId)));
+        }
+
+        List<BasketItem> items = getItems(basketId);
+
+        return new CustomerBasket(basketId, customerId, basket.getCreated(),now, items);
     }
 
     @Override

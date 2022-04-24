@@ -26,9 +26,9 @@ public class ApiKeyRequestFilter extends GenericFilterBean {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
-        String path = req.getRequestURI();
+        String getPath = req.getRequestURI();
 
-        if(path.startsWith("/basket") == false){
+        if(!getPath.startsWith("/api")){
             chain.doFilter(request, response);
             return;
         }
