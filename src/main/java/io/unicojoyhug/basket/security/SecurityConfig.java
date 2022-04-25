@@ -24,7 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         ;
     }
 
-    // N.B. rawPassword should be from env or other way instead. This is just for demonstration purpose.
+    // N.B. rawPassword should be from env or another way instead. This is just for demonstration purpose.
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
