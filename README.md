@@ -30,3 +30,4 @@ insert into api_key (key) values ('0ecd5ba3-d059-43bf-b0f0-1cf9c6a3e36a');
 - Spring Boot - data, security, web
 - Java 18
 - Postgres DB, hibernate, liquibase
+- [Swagger-ui](http://localhost:8080/swagger-ui/index.html) expects basic auth & api key
