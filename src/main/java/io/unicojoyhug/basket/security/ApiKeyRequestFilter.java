@@ -36,7 +36,7 @@ public class ApiKeyRequestFilter extends GenericFilterBean {
             return;
         }
 
-        String key = req.getHeader("Key") == null ? "" : req.getHeader("Key");
+        String key = req.getHeader("x-api-key") == null ? "" : req.getHeader("x-api-key");
 
         Optional<ApiKey> apiKeyOptional = this.apiKeyRepository.findOneByKey(key);
         if(apiKeyOptional.isPresent()){
@@ -60,6 +60,6 @@ public class ApiKeyRequestFilter extends GenericFilterBean {
                         .in("header")
                         .required(true)
                         .description("apiKey")
-                        .name("Key"));
+                        .name("x-api-key"));
     }
 }

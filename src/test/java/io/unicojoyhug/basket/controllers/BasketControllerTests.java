@@ -21,6 +21,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import java.util.Optional;
 import java.util.UUID;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -50,7 +51,9 @@ public class BasketControllerTests {
 
         mockMvc.perform(MockMvcRequestBuilders.post("/api/basket")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(jsonString).header("Key","0ecd5ba3-d059-43bf-b0f0-1cf9c6a3e36a"))
+                        .content(jsonString)
+                        .header("Key","0ecd5ba3-d059-43bf-b0f0-1cf9c6a3e36a")
+                        .with(csrf()))
                 .andExpect(status().isOk());
     }
 
@@ -61,7 +64,8 @@ public class BasketControllerTests {
 
         mockMvc.perform(MockMvcRequestBuilders.post("/api/basket")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(jsonString).header("Key","0ecd5ba3-d059-43bf-b0f0-1cf9c6a3e36a"))
+                        .content(jsonString).header("Key","0ecd5ba3-d059-43bf-b0f0-1cf9c6a3e36a")
+                        .with(csrf()))
                 .andExpect(status().isNotFound());
     }
 
@@ -72,7 +76,8 @@ public class BasketControllerTests {
 
         mockMvc.perform(MockMvcRequestBuilders.post("/api/basket")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(jsonString).header("Key","0ecd5ba3-d059-43bf-b0f0-1cf9c6a3e36a"))
+                        .content(jsonString).header("Key","0ecd5ba3-d059-43bf-b0f0-1cf9c6a3e36a")
+                        .with(csrf()))
                 .andExpect(status().isOk());
     }
 
@@ -83,7 +88,8 @@ public class BasketControllerTests {
 
         mockMvc.perform(MockMvcRequestBuilders.post("/api/basket/update")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(jsonString).header("Key","0ecd5ba3-d059-43bf-b0f0-1cf9c6a3e36a"))
+                        .content(jsonString).header("Key","0ecd5ba3-d059-43bf-b0f0-1cf9c6a3e36a")
+                        .with(csrf()))
                 .andExpect(status().isOk());
     }
 
@@ -92,7 +98,8 @@ public class BasketControllerTests {
         String jsonString="{\"customerId\": \"82c88862-1771-444e-8695-50a577d8d000\", \"basketId\": null} ";
         mockMvc.perform(MockMvcRequestBuilders.delete("/api/basket/delete")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(jsonString).header("Key","0ecd5ba3-d059-43bf-b0f0-1cf9c6a3e36a"))
+                        .content(jsonString).header("Key","0ecd5ba3-d059-43bf-b0f0-1cf9c6a3e36a")
+                        .with(csrf()))
                 .andExpect(status().isBadRequest());
     }
 
@@ -103,7 +110,8 @@ public class BasketControllerTests {
 
         mockMvc.perform(MockMvcRequestBuilders.delete("/api/basket/delete")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(jsonString).header("Key","0ecd5ba3-d059-43bf-b0f0-1cf9c6a3e36a"))
+                        .content(jsonString).header("Key","0ecd5ba3-d059-43bf-b0f0-1cf9c6a3e36a")
+                        .with(csrf()))
                 .andExpect(status().isOk());
     }
 }
