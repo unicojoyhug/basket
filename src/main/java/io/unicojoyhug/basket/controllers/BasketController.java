@@ -1,5 +1,6 @@
 package io.unicojoyhug.basket.controllers;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.unicojoyhug.basket.controllers.models.BasketDeleteRequest;
 import io.unicojoyhug.basket.controllers.models.BasketRequest;
 import io.unicojoyhug.basket.controllers.models.BasketUpdateRequest;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@SecurityRequirement(name = "basketapi")
 @RequestMapping(value ="/api/basket")
 public class BasketController {
     BasketService basketService;
