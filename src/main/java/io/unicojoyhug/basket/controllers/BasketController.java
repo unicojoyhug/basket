@@ -25,7 +25,7 @@ public class BasketController {
     }
 
     @PostMapping(path = "/update")
-    public CustomerBasket getOrCreateCustomerBasket(@RequestBody BasketUpdateRequest request){
+    public CustomerBasket updateBasket(@RequestBody BasketUpdateRequest request){
         if(request.getQuantity()<0) throw new NegativeQuantityException("Quantity cannot be negative.");
         return basketService.updateBasket(request.getBasketId(),request.getCustomerId(), request.getProductNumber(), request.getQuantity());
     }
