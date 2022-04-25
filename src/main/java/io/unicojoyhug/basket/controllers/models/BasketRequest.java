@@ -12,6 +12,14 @@ public class BasketRequest {
         this.basketId = basketId;
     }
 
+    @Override
+    public String toString() {
+        return "BasketRequest{" +
+                "customerId=" + customerId +
+                ", basketId=" + basketId +
+                '}';
+    }
+
     public UUID getCustomerId() {
         return customerId;
     }
