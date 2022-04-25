@@ -19,7 +19,7 @@ public class BasketController {
         this.basketService = basketService;
     }
 
-    @GetMapping
+    @PostMapping
     public CustomerBasket getOrCreateCustomerBasket(@RequestBody BasketRequest request) {
         return basketService.getOrCreateBasket(request.getBasketId(), request.getCustomerId());
     }
