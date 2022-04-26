@@ -14,12 +14,20 @@ import javax.persistence.EntityNotFoundException;
 @ControllerAdvice
 public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler({NegativeQuantityException.class, IllegalArgumentException.class})
+    @ExceptionHandler(NegativeQuantityException.class)
     public final ResponseEntity<Object> handleNegativeQuantityExceptions(Exception ex, WebRequest request) {
         String bodyOfResponse = "Quantity cannot be negative.";
         return handleExceptionInternal(ex, bodyOfResponse,
                 new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public final ResponseEntity<Object> handleIllegalArgumentException(Exception ex, WebRequest request) {
+        String bodyOfResponse = "Request is not acceptable.";
+        return handleExceptionInternal(ex, bodyOfResponse,
+                new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
+
 
     @ExceptionHandler({EntityNotFoundException.class, EmptyResultDataAccessException.class})
     public final ResponseEntity<Object> handleUnknownBasketId(Exception ex, WebRequest request) {
