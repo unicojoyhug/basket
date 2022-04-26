@@ -36,6 +36,8 @@ public class BasketControllerTests {
     private CustomerBasket basket;
     private ObjectMapper mapper;
 
+    private String xApiKey = "x-api-key";
+
     private UUID customerId = UUID.fromString("82c88862-1771-444e-8695-50a577d8d611");
     @Before
     public void setUp(){
@@ -52,7 +54,7 @@ public class BasketControllerTests {
         mockMvc.perform(MockMvcRequestBuilders.post("/api/basket")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonString)
-                        .header("Key","0ecd5ba3-d059-43bf-b0f0-1cf9c6a3e36a")
+                        .header(xApiKey,"0ecd5ba3-d059-43bf-b0f0-1cf9c6a3e36a")
                         .with(csrf()))
                 .andExpect(status().isOk());
     }
@@ -64,7 +66,7 @@ public class BasketControllerTests {
 
         mockMvc.perform(MockMvcRequestBuilders.post("/api/basket")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(jsonString).header("Key","0ecd5ba3-d059-43bf-b0f0-1cf9c6a3e36a")
+                        .content(jsonString).header(xApiKey,"0ecd5ba3-d059-43bf-b0f0-1cf9c6a3e36a")
                         .with(csrf()))
                 .andExpect(status().isNotFound());
     }
@@ -76,7 +78,7 @@ public class BasketControllerTests {
 
         mockMvc.perform(MockMvcRequestBuilders.post("/api/basket")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(jsonString).header("Key","0ecd5ba3-d059-43bf-b0f0-1cf9c6a3e36a")
+                        .content(jsonString).header(xApiKey,"0ecd5ba3-d059-43bf-b0f0-1cf9c6a3e36a")
                         .with(csrf()))
                 .andExpect(status().isOk());
     }
@@ -88,7 +90,7 @@ public class BasketControllerTests {
 
         mockMvc.perform(MockMvcRequestBuilders.post("/api/basket/update")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(jsonString).header("Key","0ecd5ba3-d059-43bf-b0f0-1cf9c6a3e36a")
+                        .content(jsonString).header(xApiKey,"0ecd5ba3-d059-43bf-b0f0-1cf9c6a3e36a")
                         .with(csrf()))
                 .andExpect(status().isOk());
     }
@@ -98,7 +100,7 @@ public class BasketControllerTests {
         String jsonString="{\"customerId\": \"82c88862-1771-444e-8695-50a577d8d000\", \"basketId\": null} ";
         mockMvc.perform(MockMvcRequestBuilders.delete("/api/basket/delete")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(jsonString).header("Key","0ecd5ba3-d059-43bf-b0f0-1cf9c6a3e36a")
+                        .content(jsonString).header(xApiKey,"0ecd5ba3-d059-43bf-b0f0-1cf9c6a3e36a")
                         .with(csrf()))
                 .andExpect(status().isBadRequest());
     }
@@ -110,7 +112,7 @@ public class BasketControllerTests {
 
         mockMvc.perform(MockMvcRequestBuilders.delete("/api/basket/delete")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(jsonString).header("Key","0ecd5ba3-d059-43bf-b0f0-1cf9c6a3e36a")
+                        .content(jsonString).header(xApiKey,"0ecd5ba3-d059-43bf-b0f0-1cf9c6a3e36a")
                         .with(csrf()))
                 .andExpect(status().isOk());
     }
