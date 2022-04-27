@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace=AutoConfigureTestDatabase.Replace.NONE)
-public class BasketRepositorySpec {
+public class BasketRepositoryTests {
     @Autowired
     BasketRepository basketRepository;
     @Autowired

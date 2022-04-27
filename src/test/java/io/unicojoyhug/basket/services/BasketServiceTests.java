@@ -22,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class BasketServiceSpec {
+public class BasketServiceTests {
     @Mock
     private BasketRepository basketRepository;
     @Mock

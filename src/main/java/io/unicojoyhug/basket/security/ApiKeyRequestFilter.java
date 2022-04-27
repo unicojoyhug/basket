@@ -1,7 +1,10 @@
 package io.unicojoyhug.basket.security;
 
+import io.swagger.v3.oas.models.parameters.Parameter;
 import io.unicojoyhug.basket.repositories.ApiKey;
 import io.unicojoyhug.basket.repositories.ApiKeyRepository;
+import org.springdoc.core.customizers.OperationCustomizer;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.GenericFilterBean;
 
@@ -33,7 +36,7 @@ public class ApiKeyRequestFilter extends GenericFilterBean {
             return;
         }
 
-        String key = req.getHeader("Key") == null ? "" : req.getHeader("Key");
+        String key = req.getHeader("x-api-key") == null ? "" : req.getHeader("x-api-key");
 
         Optional<ApiKey> apiKeyOptional = this.apiKeyRepository.findOneByKey(key);
         if(apiKeyOptional.isPresent()){
@@ -50,4 +53,13 @@ public class ApiKeyRequestFilter extends GenericFilterBean {
 
     }
 
+    @Bean
+    public OperationCustomizer customize() {
+        return (operation, handlerMethod) -> operation.addParametersItem(
+                new Parameter()
+                        .in("header")
+                        .required(true)
+                        .description("apiKey")
+                        .name("x-api-key"));
+    }
 }
